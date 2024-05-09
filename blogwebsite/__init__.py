@@ -4,6 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
+from flask_login import LoginManager
 
 app=Flask(__name__)
 
@@ -16,6 +17,11 @@ db=SQLAlchemy(app)
 Migrate(app,db)
 #setup context **IMPORTANT**
 app.app_context().push()
+
+#setting up login manager
+login_manager=LoginManager()
+login_manager.init_app(app)
+login_manager.login_view('users.login')   #telling users where to go to login
 
 
 
