@@ -1,0 +1,37 @@
+Website has 3 main components:
+(component and their views)
+
+CORE-
+Index and Info
+
+USERS-
+Register, Login, Logout, Account, User Posts
+
+BLOG POSTS-
+Create, Update, Delete, View Blog posts
+
+
+
+Models used:
+USERS:
+-Id
+-Profile Image
+-Email
+-Username
+-Password
+-Posts
+
+BLOG POSTS:
+-Id
+-User Id (same as id under user to link user model)
+-Date
+-Title
+-Text
+
+
+Forms:
+Create basic CRUD forms for both users and blog posts.
+
+
+
+
