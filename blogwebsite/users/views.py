@@ -4,7 +4,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from blogwebsite import db
-from blogwebsite.models import User, Blog
+from blogwebsite.models import User, BlogPost
 from blogwebsite.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 from blogwebsite.users.picture_handler import add_profile_pic
 
@@ -71,4 +71,14 @@ def account():
     profile_image=url_for('static', filename='profile_pics/'+current_user.profile_image) #what we are doing here is we are getting the profile image of the current user and displaying it in the account page
     return render_template('account.html',profile_image=profile_image,form=form)
 
+#user's list of blogs
+@users.route('/<username>') #<> is a dynamic part of the url and username changes depending on the user
+def user_posts(username):
+    page=request.args.get('page',1,type=int)  #what happens here is if the user is on page 1, it will show the first 5 blogs, if the user is on page 2, it will show the next 5 blogs and so on
+
+    users=User.query.filter_by(username=username).first_or_404()  #if the user does not exist, it will show a 404 error
+    blog_post = BlogPost.query.filter_by(author=users).order_by(BlogPost.date.desc()).paginate(page=page, per_page=5)  #getting the blog posts of the user #author is the attribute in the blogpost table in models.py backref='author' #date is the attribute in the blogpost table in models.py and desc is used to show the latest blog first
+    #paginate is used to show only 5 blogs per page
+
+    return render_template('user_blog_posts.html', blog_post=blog_post, users=users)  #users is the user whose blog posts we are displaying
 
