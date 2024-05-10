@@ -16,6 +16,7 @@ def logout():
     logout_user()
     return redirect(url_for('core.index'))  #redirecting to home page #core is the blueprint name in blogwebsite/core/views.py
 
+#register view
 @users.route('register', methods=['GET','POST'])
 def register():
     form=RegistrationForm()
@@ -28,6 +29,7 @@ def register():
     
     return render_template('register.html', form=form)
 
+#login view
 @users.route('/login', methods=['GET','POST'])
 def login():
     form=LoginForm()
@@ -43,3 +45,30 @@ def login():
             return redirect(next)
     
     return render_template('login.html', form=form)
+
+
+#account view (update user)
+@users.route('/account', methods=['GET','POST'])
+@login_required
+def account():
+    form = UpdateUserForm()
+    if form.validate_on_submit():
+        if form.picture.data:  #if user uploads a picture
+            username=current_user.username #get the username of the current user
+            pic = add_profile_pic(form.picture.data, username) #add_profile_pic is a function in picture_handler.py #it returns the picture file name
+            current_user.profile_image=pic #profile_image is a attribute in models.py user table  #storage_filename is the file name which is now stored in the user's profile_image attribute
+
+        current_user.username=form.username.data
+        current_user.email=form.email.data
+        db.session.commit()
+        flash('User Account Updated!')
+        return redirect(url_for('users.account'))
+    
+    elif request.method=='GET':  #they are not submitting the form, they are just trying to get the form
+        form.username.data=current_user.username
+        form.email.data=current_user.email
+
+    profile_image=url_for('static', filename='profile_pics/'+current_user.profile_image) #what we are doing here is we are getting the profile image of the current user and displaying it in the account page
+    return render_template('account.html',profile_image=profile_image,form=form)
+
+
