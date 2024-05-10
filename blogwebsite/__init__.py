@@ -31,9 +31,6 @@ from blogwebsite.core.views import core
 from blogwebsite.error_pages.handlers import error_pages
 app.register_blueprint(core)
 app.register_blueprint(error_pages)
-
-
-
-
-
-
+#registering users blueprint
+from blogwebsite.users.views import users
+app.register_blueprint(users)
