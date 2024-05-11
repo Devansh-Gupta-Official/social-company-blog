@@ -27,11 +27,11 @@ login_manager.login_view = 'users.login'   #telling users where to go to login
 
 
 #registering core blueprint
-from blogwebsite.core.views import core
+from puppycompanyblog.core.views import core
 #registering error_pages blueprint
-from blogwebsite.error_pages.handlers import error_pages
+from puppycompanyblog.error_pages.handlers import error_pages
 app.register_blueprint(core)
 app.register_blueprint(error_pages)
 #registering users blueprint
-from blogwebsite.users.views import users
+from puppycompanyblog.users.views import users
 app.register_blueprint(users)

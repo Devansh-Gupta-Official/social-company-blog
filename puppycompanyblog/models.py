@@ -1,7 +1,7 @@
 #user and blog post models
 
 #database is setup in the __init__.py file
-from blogwebsite import db,login_manager
+from puppycompanyblog import db,login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin   #we will use functionalities like isAuthenticated, isAnonymous, etc.
 from datetime import datetime
