@@ -17,7 +17,7 @@ def logout():
     return redirect(url_for('core.index'))  #redirecting to home page #core is the blueprint name in blogwebsite/core/views.py
 
 #register view
-@users.route('register', methods=['GET','POST'])
+@users.route('/register', methods=['GET','POST'])
 def register():
     form=RegistrationForm()
     if form.validate_on_submit():

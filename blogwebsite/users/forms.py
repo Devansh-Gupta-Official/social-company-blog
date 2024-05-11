@@ -8,7 +8,7 @@ from flask_wtf.file import FileField, FileAllowed  #let us have the user update 
 
 #users imports
 from flask_login import current_user
-from blogwebsite import User
+from blogwebsite.models import User
 
 
 class LoginForm(FlaskForm):

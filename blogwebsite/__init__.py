@@ -22,7 +22,7 @@ app.app_context().push()
 #setting up login manager
 login_manager=LoginManager()
 login_manager.init_app(app)
-login_manager.login_view('users.login')   #telling users where to go to login
+login_manager.login_view = 'users.login'   #telling users where to go to login
 
 
 
