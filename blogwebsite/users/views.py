@@ -71,6 +71,7 @@ def account():
     profile_image=url_for('static', filename='profile_pics/'+current_user.profile_image) #what we are doing here is we are getting the profile image of the current user and displaying it in the account page
     return render_template('account.html',profile_image=profile_image,form=form)
 
+
 #user's list of blogs
 @users.route('/<username>') #<> is a dynamic part of the url and username changes depending on the user
 def user_posts(username):
