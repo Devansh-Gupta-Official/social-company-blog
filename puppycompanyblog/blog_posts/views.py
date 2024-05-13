@@ -23,3 +23,9 @@ def create_post():
 
     return render_template('create_post.html', form=form)
 
+
+#VIEW
+@blog_posts.route('/<int:blog_post_id>') #dynamic url #int:blog_post_id is the variable that will be passed to the function #blog_post_id is the variable name
+def blog_post(blog_post_id):
+    blog_post = BlogPost.query.get_or_404(blog_post_id)
+    return render_template('blog_post.html', title=blog_post.title, date=blog_post.date, post=blog_post)
