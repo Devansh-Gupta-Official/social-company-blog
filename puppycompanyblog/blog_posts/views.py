@@ -3,7 +3,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import current_user, login_required
 from puppycompanyblog import db
 from puppycompanyblog.models import BlogPost
-from puppycompanyblog.blogpost.forms import BlogPostForm
+from puppycompanyblog.blog_posts.forms import BlogPostForm
 
 blog_posts = Blueprint('blog_posts', __name__)
 
@@ -22,3 +22,4 @@ def create_post():
         return redirect(url_for('core.index'))
 
     return render_template('create_post.html', form=form)
+
