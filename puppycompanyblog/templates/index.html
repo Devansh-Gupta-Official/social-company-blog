@@ -3,4 +3,16 @@
   <div class="jumbotron">
     <h1>Puppy Company Blog</h1>
   </div>
+
+  <div class="container">
+    {% for post in blog_posts.items %}
+      <div class="card">
+        <div class="card-body">
+          <h2><a class="class-title" href="{{ url_for('blog_posts.blog_post', blog_post_id=post.id) }}">{{ post.title }}</a></h2>
+          <a href="{{ url_for('users.user_post', username=post.author.username) }}">Written by: {{post.author.username}}</a>
+          <p>Published on: {{ post.date_posted.strftime('%Y-%m-%d') }}</p> 
+          <a class="btn btn-primary" href="{{ url_for('users.user_post', username=post.author.username) }}">Read blog post</a>
+          <p>{{ post.content }}</p>
+
+  </div>
 {% endblock %}
